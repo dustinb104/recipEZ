@@ -2,12 +2,15 @@ import React, { useContext } from 'react';
 import { StyleSheet, View, Text, Button, FlatList } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { UserContext } from "../contexts/UserFoodContext"
-import { Context } from "../contexts/FoodContext"
+import { Context } from "../contexts/FoodContext";
+import { ShoppingContext } from '../contexts/shoppingContext';
 
-const HeroDetailScreen = (props) => {
+const addShoppingItemScreen = (props) => {
+
+	// const dummyFood = [{name:'Banana', calories: 13, carbs: 4, protein: 9, fat: 3, sugar: 5}]
 	
 const { addHero, state } = useContext(Context);
-const { addFood, userState } = useContext(UserContext);
+const { addFood, ShoppingState } = useContext(ShoppingContext);
 
 const generateNewHero = () => {
 	let hero = {};
@@ -43,8 +46,7 @@ return <View>
 	
 	/>
 	<View>
-	<Button title="Add Hero!" onPress={() => {addHero(hero.name, hero.level, hero.power, hero.MaxHealth, hero.MaxHealth, hero.gold) 
-	}}/>
+	
 	</View>
 </View>
 
@@ -77,7 +79,15 @@ const styles = StyleSheet.create({
 	position: 'absolute',
 	justifyContent:"flex-end",
 	},
-	
+	battle: {
+		alignSelf: "center",
+		color: 'black',
+		fontWeight: 'bold',
+		fontSize: 15,
+		borderColor: 'black',
+		borderWidth: 3,
+		paddingLeft: 10,
+		}
 });
 
-export default HeroDetailScreen;
+export default addShoppingItemScreen;

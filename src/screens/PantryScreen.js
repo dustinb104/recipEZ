@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import { useContext } from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image, TextInput, Button, FlatList} from 'react-native';
-import Header from '../components/Header';
+import Header from '../../components/Header';
 import food from '../api/food';
 import { Context } from "../contexts/FoodContext"
+import { UserContext } from "../contexts/UserFoodContext"
+import { useContext } from 'react';
 
 const PantryScreen = (props) => {
     // ingredient data is the information displayed by our api
@@ -11,26 +12,9 @@ const PantryScreen = (props) => {
     // ingredient name is the parameter used for the search query to find an ingredient
     const [ingredientName, setIngredientName] = useState('')
     // call to the api
+	
 	const { addHero, state } = useContext(Context);
-	
-	const generateNewHero = () => {
-	let hero = {};
-	hero.level = 1;
-	
-	let firstNameList = ["Mark", "Sally", "Bob", "Daniel", "David", "Kevin", "Jane", "Sam", "Jill", "Kelly", "Betty", "Greg", "Jeff", "Ben", "Jay", "Ted", "Matt", "Lisa" ];
-	
-	let lastNameList = ["Fitzimmons", "Smith", "Thrillseeker", "Bonecruncher", "Mindblaster", "Knucklebuster", "Kite-flayer"]
-	
-	hero.name = firstNameList[Math.floor(Math.random() * firstNameList.length)] + " " + lastNameList[Math.floor(Math.random() * lastNameList.length)]
-	
-	hero.gold = 100;
-	hero.power = Math.floor(Math.random() * 5) + 1;
-	hero.MaxHealth = Math.floor(Math.random() * 7) + 3;
-	return hero;
-}
-
-const hero = generateNewHero();
-
+	const { addFood, userState } = useContext(UserContext);	
 	
     const getIngredient = () => {
         fetch(
@@ -48,31 +32,24 @@ const hero = generateNewHero();
 
     return <View style={styles.page}>
         <Header type={"pantry"}/>
-        <View style={styles.container}>
-            <Text>PantryScreen</Text>
-        </View>
-        {/* onChange calls handleChange and the text is the e. */}
-        <TextInput style={styles.textBox} onChangeText={ingredientName=>setIngredientName(ingredientName)}/>
-        {/* onPress calls the getIngredient() which makes the api call */}
-        <Button title="Get Meal Data" onPress={()=>{getIngredient()}}/>
-        <TouchableOpacity style={styles.imageCont} onPress={()=>{{props.navigation.navigate("Add")}
-	}}>
+        <TouchableOpacity style={styles.imageCont} onPress={()=>props.navigation.navigate('AddItem')}>
             <Image style={styles.image} source={require('../../assets/plus.png')}/>
         </TouchableOpacity>
 		
-	<View> 
-	<Text style={styles.title}>Roster</Text>
+		<View> 
+            <Text>Pantry Screen</Text>
 	<FlatList
-	data = {state}
+	data = {userState}
 	keyExtractor={(hero) => {return hero.id}}
 	renderItem={ ({item}) => {return <TouchableOpacity onPress={() => {props.navigation.navigate("Detail", {id : item.id})}}>
-	<View><Text style={styles.battle}>Name: {item.name} Level: {item.level} Health: {item.currentHealth}/{item.maxHealth} Power: {item.power} --- Gold: {item.gold}</Text></View>
+	<View><Text style={styles.battle}>Name: {item.name} calories: {item.calories} carbs: {item.carbs} protein: {item.protein} fat: {item.fat} --- Sugar: {item.sugar}</Text></View>
 		</TouchableOpacity>}}
 	
 	
 	/>
 	</View>
 		
+	
     </View>
 }
 
@@ -81,7 +58,7 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
       },
-	  	battle: {
+	 battle: {
     alignSelf: "center",
 	color: 'black',
 	fontWeight: 'bold',
@@ -108,5 +85,11 @@ const styles = StyleSheet.create({
         borderWidth: 3
     }
 });
+
+PantryScreen.navigationOptions = () => {
+    return {
+        headerShown: false,
+    }
+}
 
 export default PantryScreen;

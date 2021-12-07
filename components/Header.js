@@ -5,6 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo'
 import SearchBar from './SearchBar';
+// 
 
 const Header = (props) => {
 
@@ -17,9 +18,9 @@ const Header = (props) => {
             whatToDisplay = <View>
                 <View style={styles.head}>
                     <View style={styles.panButtonContainer}>
-                        <Image source={require('../../assets/006-snowflake.png')}/>
-                        <Image style={styles.image} source={require('../../assets/004-fridge-1.png')}/>
-                        <Image source={require('../../assets/009-stand.png')}/>
+                        <Image source={require('../assets/006-snowflake.png')}/>
+                        <Image style={styles.image} source={require('../assets/004-fridge-1.png')}/>
+                        <Image source={require('../assets/009-stand.png')}/>
                     </View>
                     <View style={styles.searchBar}>
                         <SearchBar/>
