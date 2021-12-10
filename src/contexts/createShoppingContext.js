@@ -1,10 +1,10 @@
 import React, {useReducer} from 'react';
 
 export default (reducer, actions, initialState) => {
-    const Context = React.createContext();
+    const ShoppingContext = React.createContext();
 
     const Provider = ({ children}) => {
-        const [state, dispatch] = useReducer(reducer, initialState);
+        const [ShoppingState, dispatch] = useReducer(reducer, initialState);
 
         //actions === { addBlogPost : (dispatch) => { return () => {} } }
         const boundActions = {};
@@ -13,10 +13,10 @@ export default (reducer, actions, initialState) => {
             boundActions[key] = actions[key](dispatch);
         }
 
-        return <Context.Provider value={ {state: state, ...boundActions}}>
+        return <ShoppingContext.Provider value={ {ShoppingState: ShoppingState, ...boundActions}}>
             {children}
-        </Context.Provider>
+        </ShoppingContext.Provider>
     }
 
-    return {Context, Provider};
+    return {ShoppingContext, Provider};
 };

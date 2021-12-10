@@ -7,9 +7,11 @@ import {StyleSheet,View} from 'react-native';
 import PantryScreen from "./src/screens/PantryScreen";
 // import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import RecipeListScreen from "./src/screens/RecipeListScreen";
+// import RecipeScreen from "./src/screens/RecipeScreen";
 import ShoppingListScreen from "./src/screens/ShoppingListScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
-import SignInScreen from "./src/screens/SignInScreen";
+import addShoppingItemScreen from './src/screens/addShoppingItemScreen';
+// import SignInScreen from "./src/screens/SignInScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import addItemScreen from "./src/screens/addItemScreen";
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -18,6 +20,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import {Provider as AuthProvider} from './src/contexts/AuthContext'
 import { Provider as FoodProvider } from "./src/contexts/FoodContext";
 import { Provider as UserFoodProvider } from "./src/contexts/UserFoodContext";
+import { Provider as ShoppingProvider} from './src/contexts/shoppingContext';
 import FoodDetailScreen from "./src/screens/FoodDetailScreen";
 
 
@@ -32,7 +35,7 @@ const styles = StyleSheet.create({
 const switchNavigator = createSwitchNavigator({
   loginFlow: createStackNavigator({
     Signup: SignUpScreen,
-    Signin: SignInScreen
+    // Signin: SignInScreen
   }
   ),
   mainFlow: createMaterialBottomTabNavigator({
@@ -49,7 +52,8 @@ const switchNavigator = createSwitchNavigator({
           }
         },
         AddItem: addItemScreen,
-		Detail: FoodDetailScreen
+        AddShoppingItem: addShoppingItemScreen,
+		    Detail: FoodDetailScreen
       }), //end stack navigator
         ShoppingList: {
               screen: ShoppingListScreen,
@@ -144,7 +148,9 @@ export default () => {
     <AuthProvider>
       <FoodProvider>
 	<UserFoodProvider>
+    <ShoppingProvider>
 	<App />
+  </ShoppingProvider>
 	</UserFoodProvider>
 	</FoodProvider>
     </AuthProvider>

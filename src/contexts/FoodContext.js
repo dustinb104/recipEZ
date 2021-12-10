@@ -10,18 +10,18 @@ const blogReducer = (state, action) => {
             return [...state, { 
                     id: Math.floor(Math.random() * 999999), 
 					name: action.payload.name,
-                    currentHealth: action.payload.currentHealth,
-					maxHealth: action.payload.maxHealth,
-					gold: action.payload.gold,
-					power: action.payload.power,
-					level: action.payload.level
+                    calories: action.payload.calories,
+					carbs: action.payload.carbs,
+					protein: action.payload.protein,
+					fat: action.payload.fat,
+					sugar: action.payload.sugar
                 }
             ]
         case 'delete_hero':
             return state.filter((hero) => {
                 return hero.id !== action.payload
             });
-        case 'level_hero':
+        case 'calories_hero':
             return state.map((hero) => {
                 if (hero.id === action.payload.id) {
                     return action.payload;
@@ -53,9 +53,9 @@ const getBlogPosts = dispatch => {
 }
 
 const addHero = (dispatch) => {
-    return (name, level, power, currentHealth, maxHealth, gold, callback) => {
+    return (name, calories, carbs, protein, fat, sugar, callback) => {
 		
-        dispatch({ type: 'add_hero', payload: { name: name, level: level, power: power, currentHealth: currentHealth, maxHealth: maxHealth, gold: gold } })
+        dispatch({ type: 'add_hero', payload: { name: name, calories: calories, carbs: carbs, protein: protein, fat: fat, sugar: sugar } })
 		if(callback){
         callback();
 		}
@@ -78,8 +78,8 @@ const editHero = (dispatch) => {
 }
 
 const levelHero = (dispatch) => {
-    return (id, name, level, power, currentHealth, maxHealth, gold, callback) => {
-        dispatch({type: 'level_hero', payload: { id: id, name: name, level: level, power: power, currentHealth: currentHealth, maxHealth: maxHealth, gold: gold}})
+    return (id, name, calories, carbs, protein, fat, sugar, callback) => {
+        dispatch({type: 'calories_hero', payload: { id: id, name: name, calories: calories, carbs: carbs, protein: protein, fat: fat, sugar: sugar}})
        if(callback){
         callback();
 		}
@@ -88,5 +88,8 @@ const levelHero = (dispatch) => {
 
 export const {Context, Provider} = createDataContext(blogReducer, 
                                     {addHero: addHero, deleteHero: deleteHero, levelHero: levelHero, getBlogPosts:getBlogPosts}, 
-                                    [ ]
+                                    [{id:1, name:'Apple', calories: 52, carbs: 14, protein: 0, fat:0, sugar: 10},
+                                    {id: 2,name: 'Banana', calories: 110, carbs: 28, protein: 1, fat: 0, sugar: 15},
+                                    {id:3, name: 'Carrot', calories:25, carbs: 6, protein: 0, fat: 0, sugar: 0},
+                                    {id: 4, name: 'Avacodo', calories: 250, carbs: 12, proteins: 3, fat: 24, sugar: 0}]
                                 );
