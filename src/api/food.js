@@ -1,8 +1,8 @@
-// import axios from 'axios';
+import axios from 'axios';
 
-// export default axios.create({
-//     baseURL: "`https://api.spoonacular.com",
-//     headers:{
-        
-//     }
-// })
+export default axios.create({
+    baseURL: "https://api.spoonacular.com",
+    headers:{
+        "Content-Type": "application/json",
+    }
+})

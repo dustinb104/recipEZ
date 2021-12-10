@@ -6,8 +6,8 @@ import { createStackNavigator } from "react-navigation-stack";
 import {StyleSheet,View} from 'react-native';
 import PantryScreen from "./src/screens/PantryScreen";
 // import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-// import RecipeListScreen from "./src/screens/RecipeListScreen";
-import RecipeScreen from "./src/screens/RecipeScreen";
+import RecipeListScreen from "./src/screens/RecipeListScreen";
+// import RecipeScreen from "./src/screens/RecipeScreen";
 import ShoppingListScreen from "./src/screens/ShoppingListScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import addShoppingItemScreen from './src/screens/addShoppingItemScreen';
@@ -66,7 +66,7 @@ const switchNavigator = createSwitchNavigator({
               }
             },
         RecipeList: {
-              screen: RecipeScreen,
+              screen: RecipeListScreen,
               navigationOptions:{
                 tabBarIcon: ({tintColor}) => (
                   <View>
